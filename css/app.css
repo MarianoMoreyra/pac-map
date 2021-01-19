@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    background-color: darkorchid;
+}
+
+nav {
+    text-align: center;
+    background-color: purple;
+    padding: 1.5em;
+}
+
+h1 {
+    margin: 0;
+    color: white;
+}
+
+#map {
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    width: 15px;
+    height: 15px;
+    box-sizing: border-box;
+}
+
+.square-boxed {
+    border: 1px white solid;
+}
+
+.square:hover {
+    border: 3px red solid;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.tile {
+    cursor: pointer;
+}
+
+input[type="color"] {
+    width: 20px;
+    border-image: none;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.tile:hover, 
+.tile:focus {
+    background-color: purple;
+}
+
+/* .tile-selected {
+    background-color: teal;
+} */
+
+.tile-selected:after {
+    margin-left: 10px;
+    content: '👈';
+}

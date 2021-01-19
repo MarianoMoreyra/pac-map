@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <link href="/css/app.css" rel="stylesheet"></link>
+    
+    <title>Map Generator for JS Mini Games</title>
+</head>
+<body>
+    <div id="app" tabindex="0" @keydown.ctrl.prevent="handleKeys">
+        <div>
+            <nav>
+                <h1>{{ title }}</h1>
+            </nav>
+    
+            <aside id="options">
+                <input id="width" v-model="width" type="number" placeholder="enter width">
+                <input id="height" v-model="height" type="number" placeholder="enter height">
+                <button @click.prevent="regenerate">Regenerate</button>
+            </aside>
+    
+            <!-- main section where the map will be rendered -->
+            <main id="map" :style="{ width: totalWidth +'px' }">
+                <div class="square"
+                     :class="{'square-boxed' : showGrid }"
+                     :style="{ 'background-color': tiles[square].color }" 
+                     @click="paintSquare(index)"
+                     v-for="(square, index) in squares"
+                >
+                    <!-- {{ square }} -->
+                </div>
+            </main>
+    
+            <!-- toolbox where we can add tiles -->
+            <aside id="toolbox">
+                <div class="tile tile-0"  
+                     :class="{ 'tile-selected': tile.id == selectedTile }"
+                     @click="selectTile(tile.id)" 
+                     v-for="tile in tiles"
+                >
+                    <label for="">Ctrl + {{ tile.id }}</label>
+                    <input type="color" :value="tile.color">
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: 'Map Generator',
+                width: 10,
+                height: 10,
+                totalWidth: 150,
+                squares: [],
+                selectedTile: 0,
+                showGrid: true,
+                tiles: [
+                    {id: 0, color: "#ff0000", selected: true },
+                    {id: 1, color: "#00ff00", selected: false },
+                    {id: 2, color: "#0000ff", selected: false },
+                    {id: 3, color: "#ff00ff", selected: false },
+                    {id: 4, color: "#ffff00", selected: false },
+                    {id: 5, color: "#00ffff", selected: false },
+                    {id: 6, color: "#ffa200", selected: false },
+                    {id: 7, color: "#bc0101", selected: false },
+                    {id: 8, color: "#000000", selected: false },
+                    {id: 9, color: "#ffffff", selected: false },
+                ],
+            },
+            mounted() {
+                for(let i=0; i < this.width * this.height; i++) {
+                    // have to set the value like this
+                    // instead of push because dynamic arrays
+                    // are not reactive otherwise
+                    Vue.set(this.squares, i, this.selectedTile)
+                }
+            },
+            methods: {
+                regenerate: function() {
+                    this.squares = []
+                    for(let i=0; i < this.width * this.height; i++) {
+                        // have to set the value like this
+                        // instead of push because dynamic arrays 
+                        // are not reactive otherwise
+                        Vue.set(this.squares, i, this.selectedTile)
+                    }                 
+                    this.totalWidth = this.width * 15   
+                },
+                selectTile: function(tile) {
+                    // this.tiles[tile].selected = true
+                    this.selectedTile = tile
+                },
+                paintSquare: function(square) {
+                    Vue.set(this.squares, square, this.tiles[this.selectedTile].id)
+                },
+                handleKeys: function(e) {
+                    if(e.keyCode === 71) {
+                        this.showGrid = !this.showGrid
+                    }
+
+                    if(e.ctrlKey && (e.keyCode>=48 && e.keyCode<=57)) {
+                        this.selectedTile = e.keyCode - 48
+                    }  
+                    
+                    if(e.ctrlKey && (e.keyCode>=96 && e.keyCode<=105)) {
+                        this.selectedTile = e.keyCode - 96
+                    }    
+                    return false                  
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
