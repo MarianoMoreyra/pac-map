@@ -2,24 +2,103 @@ body {
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
     color: white;
-    background-color: darkorchid;
+    background-color: rgb(90, 90, 90);
 }
 
-nav {
+nav,
+footer {
     text-align: center;
-    background-color: purple;
+    background-color: rgb(60, 60, 60);
     padding: 1.5em;
 }
 
-h1 {
+a {
+    text-decoration: none;
+    color: white;
+}
+
+h1, h3 {
     margin: 0;
     color: white;
 }
 
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}    
+
+#app:focus {
+    outline: none;
+}
+
+.btn {
+    background-color: rgb(90, 90, 90);
+    border: 1px solid rgb(90, 90, 90);
+    border-radius: 5px;
+    color: white;
+    padding: 5px 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: rgb(120, 120, 120);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#options {
+    background-color: rgb(60, 60, 60);
+    border-radius: 10px;    
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px 4px rgba(120, 120, 120, 0.5)
+}
+
+#options h3 {
+    margin-bottom: 1em;
+}
+
+#options #width,
+#options #height {
+    width: 50px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 1px;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    min-width: 800px;
+    margin: 25px 0;
+}
+
+#sidebar-left,
+#toolbox {
+    width: 250px;
+}
+
+#toolbox {
+    text-align: right;
+    padding-right: 100px;
+    box-sizing: border-box;
+}
+
 #map {
-    margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
+    margin: 0 50px;
+    box-shadow: 0px 0px 13px 8px rgba(255,255,255,0.8);
 }
 
 .square {
@@ -53,14 +132,14 @@ input[type="color"] {
 
 .tile:hover, 
 .tile:focus {
-    background-color: purple;
+    background-color: rgb(60, 60, 60);
 }
 
-/* .tile-selected {
-    background-color: teal;
-} */
+.tile-selected:before {
+    margin-right: 10px;
+    content: '👉';
+}
 
-.tile-selected:after {
-    margin-left: 10px;
-    content: '👈';
+.social {
+    font-size: 1.2rem !important;
 }
