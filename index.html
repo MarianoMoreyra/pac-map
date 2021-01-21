@@ -56,7 +56,7 @@
                         v-for="tile in tiles"
                     >
                         <label for="">Ctrl + {{ tile.id }}</label>
-                        <input type="color" :value="tile.color">
+                        <input type="color" v-model="tile.color">
                     </div>
                 </aside>
             </div>
